@@ -1,0 +1,66 @@
+@import './common/settings';
+
+#home {
+    background-image: url(../../assets/images/Home/main.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.home {
+    background-color: rgba(0, 0, 0, .65);
+    padding: 0 $md;
+    height: 65%;
+    width: 35%;
+
+    &__title {
+        font-size: $lg;
+        color: $off-white;
+        font-weight: 400;
+    }
+
+    &__btn {
+        cursor: pointer;
+        color: $off-white;
+        padding: $xs 0;
+        text-align: center;
+        border-radius: $button-radius-md;
+        transition: .3s linear all;
+
+        &:hover {
+            text-decoration: inherit;
+            color: lighten($off-white, 10%);
+        }
+
+        &-play {
+            width: 95%;
+            background-color: $green;
+
+            &:hover {
+                background-color: darken($green, 10%);
+            }
+        }
+
+        &-login, 
+        &-register {
+            width: 45%;
+        }
+
+        &-login {
+            background-color: $red;
+
+            &:hover {
+                background-color: darken($red, 10%);
+            }
+        }
+
+        &-register {
+            background-color: $blue;
+
+            &:hover {
+                background-color: darken($blue, 10%);
+            }
+        }
+    }
+}
