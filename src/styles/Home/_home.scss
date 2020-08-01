@@ -39,6 +39,7 @@
 
             &:hover {
                 background-color: darken($green, 10%);
+                box-shadow: $shadow;
             }
         }
 
@@ -52,6 +53,7 @@
 
             &:hover {
                 background-color: darken($red, 10%);
+                box-shadow: $shadow;
             }
         }
 
@@ -60,7 +62,24 @@
 
             &:hover {
                 background-color: darken($blue, 10%);
+                box-shadow: $shadow;
             }
         }
+    }
+}
+
+@media (max-width: $md-screen) {
+    .home {
+        padding: 0 $sm;
+        width: 70%;
+        height: 70%;
+    }
+}
+
+@media (max-width: $sm-screen) {
+    .home {
+        padding: 0 $sm;
+        width: 80%;
+        height: 80%;
     }
 }

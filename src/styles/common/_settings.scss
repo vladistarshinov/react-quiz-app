@@ -1,5 +1,6 @@
 //Colors
 $off-white: #ebe8e8;
+$off-black: #333;
 $green: #57b846;
 $red: #ea4355;
 $blue: #3da2f5;
@@ -13,5 +14,14 @@ $lg: 3rem;
 $xl: 5rem;
 $xxl: 7rem;
 
-$quicksandFont: 'Quicksand', sans-serif;
+/* $quicksandFont: 'Quicksand', sans-serif; */
 $button-radius-md: 30px;
+
+// Adaptive screens
+$lg-screen: 1024px;
+$md-screen: 768px;
+$sm-screen: 641px;
+$xs-screen: 480px;
+
+// Shadow
+$shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12), 0 1px 5px 0 rgba(0, 0, 0, .2);

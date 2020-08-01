@@ -1,0 +1,26 @@
+@import './common/settings';
+
+.instructions{
+    border: 1px solid darken($off-white, 10%);
+    border-radius: 5px;
+    margin-top: $lg;
+    margin-bottom: $lg;
+    padding: $sm $lg;
+
+    &__title {
+        text-align: center;
+        font-size: $md;
+        font-weight: 500;
+        color: $off-black;
+    }
+
+    .browser-default {
+        padding-left: 40px;
+    }
+
+    img {
+        width: 80%;
+        height: 50%;
+    }
+}
+
