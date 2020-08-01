@@ -1,0 +1,105 @@
+@import './common/settings';
+
+.test {
+    background-color: lighten($off-white, 5%);
+    border: 2px solid darken($off-white, 5%);
+    border-left: 5px solid $blue-dark;
+    width: 80%;
+    margin: $lg auto 0 auto;
+    padding: $sm $md;
+
+    &__icons > p > span{
+        position: relative;
+        top: 2px;
+    }
+
+    &__attempts > p > span {
+        display: flex;
+        align-items: center;
+    }
+
+    &__question {
+        margin-bottom: $lg;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    &__answers {
+        display: inline-block;
+        width: 50%;
+
+        &-option {
+            background-color: $blue;
+            border-radius: $button-radius-md;
+            color: $off-white;
+            cursor: pointer;
+            margin: $md auto;
+            padding: $normal;
+            width: 90%;
+            text-align: center;
+            transition: .3s linear all;
+
+            &:hover {
+                color: #fff;
+                background-color: darken($blue, 10%);
+            }
+
+            &:active {
+                color: #fff;
+                background-color: $blue-dark;
+            }
+
+        }
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto $sm auto;
+        cursor: pointer;
+        padding: $md;
+        width: 80%;
+
+        & .btn_actions {
+            border: none;
+            color: $off-white;
+            cursor: pointer;
+            margin-right: $md;
+            padding: $xs $sm;
+            border-radius: 5px;
+
+            &:first-child {
+                background-color: darken($blue, 10%);
+                box-shadow: $shadow;
+                transition: .2s linear all;
+
+                &:hover {
+                    background-color: darken($blue, 20%);
+                    color: #fff;
+                }
+            }
+
+            &:nth-child(2) {
+                background-color: darken($red, 10%);
+                box-shadow: $shadow;
+                transition: .2s linear all;
+
+                &:hover {
+                    background-color: darken($red, 20%);
+                    color: #fff;
+                }
+            }
+
+            &:last-child {
+                background-color: darken($green, 10%);
+                box-shadow: $shadow;
+                transition: .2s linear all;
+
+                &:hover {
+                    background-color: darken($green, 20%);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

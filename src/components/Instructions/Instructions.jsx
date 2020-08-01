@@ -15,7 +15,7 @@ const Instructions = () => (
     <Fragment>
         <HelmetProvider>
             <Helmet>
-                <title>Quiz App - Instructions</title>
+                <title>Instructions</title>
             </Helmet>
             <section className="instructions container">
                 <h2 className="instructions__title">How to play the game</h2>
@@ -52,7 +52,7 @@ const Instructions = () => (
                 </ul>
                 <BDiv pt="2" pb="5">
                     <span className="left"><Link to="/">No take me back.</Link></span>
-                    <span className="right"><Link to="/play">Okay, let's do this!</Link></span>
+                    <span className="right"><Link to="/play/test">Okay, let's do this!</Link></span>
                 </BDiv>
             </section>
         </HelmetProvider>
