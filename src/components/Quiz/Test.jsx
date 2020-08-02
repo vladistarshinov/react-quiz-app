@@ -33,7 +33,7 @@ class Test extends Component {
             hints: 5,
             prevRandomNumbers: [],
             fiftyFifty: 2,
-            usedFiftyFitty: false
+            usedFiftyFifty: false
         };
     }
 
@@ -119,11 +119,61 @@ class Test extends Component {
         }
     }
 
+    controlFiftyFiftyClick = () => {
+        if (this.state.fiftyFifty > 0 && this.state.usedFiftyFifty === false) {
+            const options = document.querySelectorAll('.option');
+            const randomNumbers = [];
+            let indexOfAnswer;
+            let count = 0;
+
+            options.forEach((option, index) => {
+                if (option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+                    indexOfAnswer = index;
+                }
+            });
+
+            do {
+                const randomNumber = Math.round(Math.random() * 3);
+                if (randomNumber !== indexOfAnswer) {
+                    if (randomNumbers.length < 2 && !randomNumbers.includes(randomNumber) && !randomNumbers.includes(indexOfAnswer)){
+                            randomNumbers.push(randomNumber);
+                            count++;
+                    } else {
+                        while(true) {
+                            const newRandomNumber = Math.round(Math.random() * 3);
+                            if (!randomNumbers.includes(newRandomNumber) && !randomNumbers.includes(indexOfAnswer)) {
+                                randomNumbers.push(newRandomNumber);
+                                count++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            while (count < 2);
+
+            options.forEach((option, index) => {
+                if (randomNumbers.includes(index)) {
+                    option.style.visibility = 'hidden';
+                }
+            });
+
+            this.setState(prevState => ({
+                fiftyFifty: prevState.fiftyFifty--,
+                usedFiftyFifty: true
+            }));
+        }
+    }
+
     showOptions = () => {
         const options = Array.from(document.querySelectorAll('.option'));
 
         options.forEach(option => {
             option.style.visibility = 'visible';
+        });
+
+        this.setState({
+            usedFiftyFifty: false
         })
     }
 
@@ -132,21 +182,21 @@ class Test extends Component {
             const options = Array.from(document.querySelectorAll('.option'));
             let indexOfAnswer;
 
-            options.forEach((option, i) => {
+            options.forEach((option, index) => {
                 if(option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
-                    indexOfAnswer = i;
+                    indexOfAnswer = index;
                 }
             });
 
             while(true) {
-                const randNum = Math.round(Math.random() * 3);
-                if (randNum !== indexOfAnswer && !this.state.prevRandomNumbers.includes(randNum)) {
-                    options.forEach((option, i) => {
-                    if (i === randNum) {
+                const randomNumber = Math.round(Math.random() * 3);
+                if (randomNumber !== indexOfAnswer && !this.state.prevRandomNumbers.includes(randomNumber)) {
+                    options.forEach((option, index) => {
+                    if (index === randomNumber) {
                             option.style.visibility = 'hidden';
                             this.setState((prevState) => ({
                                 hints: prevState.hints--,
-                                prevRandomNumbers: prevState.prevRandomNumbers.concat(randNum)
+                                prevRandomNumbers: prevState.prevRandomNumbers.concat(randomNumber)
                             }));
                     }
                     });
@@ -194,7 +244,7 @@ class Test extends Component {
     }
 
     render() {
-        const { currentQuestion, currentQuestionIndex, numberOfQuestions, hints } = this.state;
+        const { currentQuestion, currentQuestionIndex, numberOfQuestions, hints, fiftyFifty } = this.state;
 
         return (
             <Fragment>
@@ -209,9 +259,9 @@ class Test extends Component {
                     </Fragment>
                     <section className="test">
                         <BDiv className="test__icons" display="flex" justifyContent="between" ml="2" mr="2">
-                            <p>
+                            <p onClick={this.controlFiftyFiftyClick}>
                                 <SealIcon size="20"/>
-                                <span>2</span>
+                                <span>{fiftyFifty}</span>
                             </p>
                             <p onClick={this.controlHintsClick}>
                                 <LedOnIcon className="test__icons-hints" size="20" />
