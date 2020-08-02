@@ -4,9 +4,9 @@
     background-color: lighten($off-white, 5%);
     border: 2px solid darken($off-white, 5%);
     border-left: 5px solid $blue-dark;
-    width: 80%;
+    width: 65%;
     margin: $lg auto 0 auto;
-    padding: $sm $md;
+    padding: $sm $lg;
 
     &__icons > p > span{
         position: relative;

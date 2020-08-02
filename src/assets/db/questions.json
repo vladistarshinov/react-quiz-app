@@ -1,0 +1,82 @@
+[
+    {
+        "question": "React JS is a ...",
+        "optionA": "JavaScript library",
+        "optionB": "Framework",
+        "optionC": "MVC-framework",
+        "optionD": "Server platform",
+        "answer": "JavaScript library"
+    },
+    {
+        "question": "What does the method setState do?",
+        "optionA": "Renders component",
+        "optionB": "Only rebuilds the application",
+        "optionC": "Updates the DOM and monitors the state",
+        "optionD": "Сalls the handler",
+        "answer": "Updates the DOM and monitors the state"
+    },
+    {
+        "question": "What are the features not specific to React?",
+        "optionA": "It uses the virtual DOM instead of the real DOM",
+        "optionB": "It uses server-side rendering",
+        "optionC": "It follows uni-directional data flow or data binding",
+        "optionD": "Static typing",
+        "answer": "Static typing"
+    },
+    {
+        "question": "What part of the MVC design pattern does React.js implement?",
+        "optionA": "React is designed to work with the 'view' part",
+        "optionB": "React is a complete MVC framework",
+        "optionC": "React is an 'controller' of design pattern MVC",
+        "optionD": "React don't implement the MVC",
+        "answer": "React is designed to work with the 'view' part"
+    },
+    {
+        "question": "What template engine can you use in React?",
+        "optionA": "HBS",
+        "optionB": "EJS",
+        "optionC": "XML",
+        "optionD": "Shouldn't use any templating engine",
+        "answer": "Shouldn't use any templating engine"
+    },
+    {
+        "question": "Which component method should you use for custom logic to react to changes?",
+        "optionA": "componentWillUpdate",
+        "optionB": "getSnapshotBeforeUpdate",
+        "optionC": "shouldComponentUpdate",
+        "optionD": "componentWillMount",
+        "answer": "shouldComponentUpdate"
+    },
+    {
+        "question": "What attribute is required when rendering list components?",
+        "optionA": "key",
+        "optionB": "index",
+        "optionC": "data-index",
+        "optionD": "id",
+        "answer": "key"
+    },
+    {
+        "question": "Which method of any React component gets called first?",
+        "optionA": "componentDidMount",
+        "optionB": "constructor",
+        "optionC": "componentWillMount",
+        "optionD": "render",
+        "answer": "constructor"
+    },
+    {
+        "question": "How do I create a React component without inheriting from the React.Component class?",
+        "optionA": "Using React.createElement method",
+        "optionB": "It's impossible",
+        "optionC": "Using ReactDOM.render method",
+        "optionD": "Using React.Fragment method",
+        "answer": "Using ReactDOM.render method"
+    },
+    {
+        "question": "What are the facts about the Flux truth?",
+        "optionA": "React app cannot be written and rendered without Flux",
+        "optionB": "Flux is part of React",
+        "optionC": "The components of Flux are Stores, Views, Actions",
+        "optionD": "Dispatcher is not a Flux component",
+        "answer": "The components of Flux are Stores, Views, Actions"
+    }
+]
