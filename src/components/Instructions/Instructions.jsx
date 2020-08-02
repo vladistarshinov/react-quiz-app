@@ -21,8 +21,8 @@ const Instructions = () => (
                 <h2 className="instructions__title">How to play the game</h2>
                 <p>Ensure you read this guide from start to finish.</p>
                 <ul className="browser-default">
-                    <li>This game has a duration of 15 minutes and ends as soon as your time elapses.</li>
-                    <li>Each game consist of 15 questions.</li>
+                    <li>This game has a duration of 5 minutes and ends as soon as your time elapses.</li>
+                    <li>Each game consist of 10 questions.</li>
                     <li>Every question contains 4 opinions.</li>
                     <BDiv className="text-center" mt="3" mb="3">
                         <img src={ExampleCardQuestion} alt="Example Card" />

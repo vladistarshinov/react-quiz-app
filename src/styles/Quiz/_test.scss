@@ -8,9 +8,19 @@
     margin: $lg auto 0 auto;
     padding: $sm $lg;
 
-    &__icons > p > span{
-        position: relative;
-        top: 2px;
+    &__icons > p {
+        cursor: pointer;
+        color: darken($green, 20%);
+
+        &:hover, &:hover .test__icons-hints {
+            color: darken($orange, 20%);
+            background: none;
+        }
+
+        & > span{
+            position: relative;
+            top: 2px;
+        }
     }
 
     &__attempts > p > span {

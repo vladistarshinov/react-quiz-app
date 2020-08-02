@@ -31,6 +31,7 @@ class Test extends Component {
             numberOfQuestions: 0,
             numberOfSelectedQuestion: 0,
             hints: 5,
+            prevRandomNumbers: [],
             fiftyFifty: 2,
             usedFiftyFitty: false
         };
@@ -54,7 +55,10 @@ class Test extends Component {
                 prevQuestion,
                 nextQuestion,
                 numberOfQuestions: questions.length,
-                answer
+                answer,
+                prevRandomNumbers: []
+            }, () => {
+                this.showOptions();
             });
         }
     };
@@ -115,6 +119,44 @@ class Test extends Component {
         }
     }
 
+    showOptions = () => {
+        const options = Array.from(document.querySelectorAll('.option'));
+
+        options.forEach(option => {
+            option.style.visibility = 'visible';
+        })
+    }
+
+    controlHintsClick = () => {
+        if (this.state.hints > 0) {
+            const options = Array.from(document.querySelectorAll('.option'));
+            let indexOfAnswer;
+
+            options.forEach((option, i) => {
+                if(option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+                    indexOfAnswer = i;
+                }
+            });
+
+            while(true) {
+                const randNum = Math.round(Math.random() * 3);
+                if (randNum !== indexOfAnswer && !this.state.prevRandomNumbers.includes(randNum)) {
+                    options.forEach((option, i) => {
+                    if (i === randNum) {
+                            option.style.visibility = 'hidden';
+                            this.setState((prevState) => ({
+                                hints: prevState.hints--,
+                                prevRandomNumbers: prevState.prevRandomNumbers.concat(randNum)
+                            }));
+                    }
+                    });
+                    break;
+                }
+                if (this.state.prevRandomNumbers.length >= 2) break;
+            }
+        }
+    }
+
     controlButtonClickSound = () => {
         document.getElementById('button-click').play();
     };
@@ -152,7 +194,7 @@ class Test extends Component {
     }
 
     render() {
-        const { currentQuestion, currentQuestionIndex, numberOfQuestions } = this.state;
+        const { currentQuestion, currentQuestionIndex, numberOfQuestions, hints } = this.state;
 
         return (
             <Fragment>
@@ -168,12 +210,12 @@ class Test extends Component {
                     <section className="test">
                         <BDiv className="test__icons" display="flex" justifyContent="between" ml="2" mr="2">
                             <p>
-                                <SealIcon size="20" color="green" />
+                                <SealIcon size="20"/>
                                 <span>2</span>
                             </p>
-                            <p>
-                                <LedOnIcon size="20" color="green" />
-                                <span>5</span>
+                            <p onClick={this.controlHintsClick}>
+                                <LedOnIcon className="test__icons-hints" size="20" />
+                                <span>{hints}</span>
                             </p>
                         </BDiv>
                         <BDiv className="test__attempts" display="flex" justifyContent="between">
@@ -189,12 +231,12 @@ class Test extends Component {
                         </BDiv>
                         <h5 className="test__question">{currentQuestion.question}</h5>
                         <div className="test__answers">
-                            <p className="test__answers-option" onClick={this.controlOptionClick}>{currentQuestion.optionA}</p>
-                            <p className="test__answers-option" onClick={this.controlOptionClick}>{currentQuestion.optionB}</p>
+                            <p className="test__answers-option option" onClick={this.controlOptionClick}>{currentQuestion.optionA}</p>
+                            <p className="test__answers-option option" onClick={this.controlOptionClick}>{currentQuestion.optionB}</p>
                         </div>
                         <div className="test__answers">
-                            <p className="test__answers-option" onClick={this.controlOptionClick}>{currentQuestion.optionC}</p>
-                            <p className="test__answers-option" onClick={this.controlOptionClick}>{currentQuestion.optionD}</p>
+                            <p className="test__answers-option option" onClick={this.controlOptionClick}>{currentQuestion.optionC}</p>
+                            <p className="test__answers-option option" onClick={this.controlOptionClick}>{currentQuestion.optionD}</p>
                         </div>
                         <div className="test__btn">
                             <button id="prev-question" className="btn_actions" onClick={this.controlButtonClickAction}>Previous</button>
