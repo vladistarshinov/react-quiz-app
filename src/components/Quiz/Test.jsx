@@ -39,12 +39,19 @@ class Test extends Component {
             nextButtonDisabled: true
         };
         this.interval = null;
+        this.correctAnswerSnd = React.createRef();
+        this.wrongAnswerSnd = React.createRef();
+        this.buttonClickSnd = React.createRef();
     }
 
     componentDidMount() {
         const { questions, currentQuestion, prevQuestion, nextQuestion } = this.state;
         this.displayQuestions(questions, currentQuestion, prevQuestion, nextQuestion);
         this.startTimer();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     displayQuestions = (questions = this.state.questions, currentQuestion, prevQuestion, nextQuestion) => {
@@ -72,12 +79,12 @@ class Test extends Component {
     controlOptionClick = (e) => {
        if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
             setTimeout(() => {
-                document.getElementById('correct-answer').play();
+                this.correctAnswerSnd.current.play()
             }, 100);
            this.correctAnswer();
        } else {
             setTimeout(() => {
-                document.getElementById('wrong-answer').play();
+                this.wrongAnswerSnd.current.play()
             }, 100);
            this.wrongAnswer();
        }
@@ -236,14 +243,14 @@ class Test extends Component {
     }
 
     controlButtonClickSound = () => {
-        document.getElementById('button-click').play();
+        this.buttonClickSnd.current.play();
     }
 
     correctAnswer = () => {
         M.toast({
             html: 'Correct Answer!',
             classes: 'toast-valid',
-            displayLength: 1500
+            displayLength: 500
         });
         this.setState(prevState => ({
             score: prevState.score++,
@@ -251,7 +258,11 @@ class Test extends Component {
             currentQuestionIndex: prevState.currentQuestionIndex++,
             numberOfSelectedQuestion: prevState.numberOfSelectedQuestion++
         }), () => {
-            this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.prevQuestion, this.state.nextQuestion);
+            if (this.state.nextQuestion === undefined) {
+                this.endTest();
+            } else {
+                this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.prevQuestion, this.state.nextQuestion);
+            }
         });
     }
 
@@ -260,14 +271,18 @@ class Test extends Component {
         M.toast({
             html: 'Wrong Answer!',
             classes: 'toast-invalid',
-            displayLength: 1500
+            displayLength: 500
         });
         this.setState(prevState => ({
             wrongAnswers: prevState.wrongAnswers++,
             currentQuestionIndex: prevState.currentQuestionIndex++,
             numberOfSelectedQuestion: prevState.numberOfSelectedQuestion++
         }), () => {
-            this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.prevQuestion, this.state.nextQuestion);
+            if (this.state.nextQuestion === undefined) {
+                this.endTest();
+            } else {
+                this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.prevQuestion, this.state.nextQuestion);
+            }
         });
     }
 
@@ -297,8 +312,7 @@ class Test extends Component {
                         seconds: 0
                     }
                 }, () => {
-                    alert('Quiz has ended!');
-                    this.props.history.push('/');
+                    this.endTest();
                 });
             } else {
                 this.setState({
@@ -310,6 +324,22 @@ class Test extends Component {
                 });
             }
         }, 1000);
+    }
+
+    endTest = () => {
+        const playerResume = {
+            score: this.state.score,
+            numberOfQuestions: this.state.numberOfQuestions,
+            numberOfSelectedQuestion: this.state.numberOfSelectedQuestion,
+            correctAnswers: this.state.correctAnswers,
+            wrongAnswers: this.state.wrongAnswers,
+            fiftyFiftyUsed: 2 - this.state.fiftyFifty,
+            hintUsed: 5 - this.state.hints
+        };
+
+        setTimeout(() => {
+            this.props.history.push('/');
+        }, 500)
     }
 
     render() {
@@ -329,9 +359,9 @@ class Test extends Component {
                         <title>Test</title>
                     </Helmet>
                     <Fragment>
-                        <audio id="correct-answer" src={CorrentAnswerSound}></audio>
-                        <audio id="wrong-answer" src={WrongAnswerSound}></audio>
-                        <audio id="button-click" src={ButtonClickSound}></audio>
+                        <audio ref={this.correctAnswerSnd} src={CorrentAnswerSound}></audio>
+                        <audio ref={this.wrongAnswerSnd} src={WrongAnswerSound}></audio>
+                        <audio ref={this.buttonClickSnd} src={ButtonClickSound}></audio>
                     </Fragment>
                     <section className="test">
                         <BDiv className="test__icons" display="flex" justifyContent="between" ml="2" mr="2">
