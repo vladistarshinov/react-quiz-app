@@ -1,4 +1,5 @@
 @import './common/settings';
+@import './common/base';
 
 .test {
     background-color: lighten($off-white, 5%);
@@ -70,7 +71,7 @@
         padding: $md;
         width: 80%;
 
-        & .btn_actions {
+        & button {
             border: none;
             color: $off-white;
             cursor: pointer;

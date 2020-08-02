@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import classNames from 'classnames';
 
 import { BDiv } from 'bootstrap-4-react';
 import M from 'materialize-css';
@@ -33,13 +34,17 @@ class Test extends Component {
             hints: 5,
             prevRandomNumbers: [],
             fiftyFifty: 2,
-            usedFiftyFifty: false
+            usedFiftyFifty: false,
+            previousButtonDisabled: false,
+            nextButtonDisabled: true
         };
+        this.interval = null;
     }
 
     componentDidMount() {
         const { questions, currentQuestion, prevQuestion, nextQuestion } = this.state;
         this.displayQuestions(questions, currentQuestion, prevQuestion, nextQuestion);
+        this.startTimer();
     }
 
     displayQuestions = (questions = this.state.questions, currentQuestion, prevQuestion, nextQuestion) => {
@@ -59,6 +64,7 @@ class Test extends Component {
                 prevRandomNumbers: []
             }, () => {
                 this.showOptions();
+                this.controlButtonDisabled();
             });
         }
     };
@@ -101,6 +107,28 @@ class Test extends Component {
         }), () => {
             this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.prevQuestion, this.state.nextQuestion);
         });
+    }
+
+    controlButtonDisabled = () => {
+        if (this.state.prevQuestion === undefined || this.state.currentQuestionIndex === 0) {
+            this.setState({
+                previousButtonDisabled: true
+            });
+        } else {
+            this.setState({
+                previousButtonDisabled: false
+            });
+        }
+
+        if (this.state.nextQuestion === undefined || this.state.currentQuestionIndex + 1 === this.state.numberOfQuestions) {
+            this.setState({
+                nextButtonDisabled: true
+            });
+        } else {
+            this.setState({
+                nextButtonDisabled: false
+            });
+        }
     }
 
     controlNextButtonClick = () => {
@@ -209,7 +237,7 @@ class Test extends Component {
 
     controlButtonClickSound = () => {
         document.getElementById('button-click').play();
-    };
+    }
 
     correctAnswer = () => {
         M.toast({
@@ -243,8 +271,56 @@ class Test extends Component {
         });
     }
 
+    startTimer = () => {
+        const countDownTime = Date.now() * 1000;
+        this.interval = setInterval(() => {
+            const now = new Date();
+            const distance = countDownTime - now;
+            
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            if (minutes < 1) {
+                const testTimeElem = document.getElementById('test__time');
+                testTimeElem.style.color = 'red';
+            }
+
+            if (minutes === 0 && seconds === '00') {
+                clearInterval(this.interval);
+                this.setState({
+                    time: {
+                        minutes: 0,
+                        seconds: 0
+                    }
+                }, () => {
+                    alert('Quiz has ended!');
+                    this.props.history.push('/');
+                });
+            } else {
+                this.setState({
+                    time: {
+                        minutes,
+                        seconds,
+                        distance
+                    }
+                });
+            }
+        }, 1000);
+    }
+
     render() {
-        const { currentQuestion, currentQuestionIndex, numberOfQuestions, hints, fiftyFifty } = this.state;
+        const { 
+            currentQuestion, 
+            currentQuestionIndex, 
+            numberOfQuestions, 
+            hints, 
+            fiftyFifty,
+            time 
+        } = this.state;
 
         return (
             <Fragment>
@@ -273,9 +349,9 @@ class Test extends Component {
                                 <span>{currentQuestionIndex + 1} of {numberOfQuestions}</span>
                             </p>
                             <p>
-                                <span>
+                                <span id="test__time">
                                     <ClockIcon size="18" />
-                                    <span className="ml-1">1:58</span>
+                                    <span className="ml-1">{time.minutes}:{time.seconds}</span>
                                 </span>
                             </p>
                         </BDiv>
@@ -289,9 +365,26 @@ class Test extends Component {
                             <p className="test__answers-option option" onClick={this.controlOptionClick}>{currentQuestion.optionD}</p>
                         </div>
                         <div className="test__btn">
-                            <button id="prev-question" className="btn_actions" onClick={this.controlButtonClickAction}>Previous</button>
-                            <button id="quit" className="btn_actions" onClick={this.controlButtonClickAction}>Quit</button>
-                            <button id="next-question" className="btn_actions" onClick={this.controlButtonClickAction}>Next</button>
+                            <button
+                                className={classNames('', {'disable': this.state.previousButtonDisabled})}  
+                                id="prev-question" 
+                                onClick={this.controlButtonClickAction}
+                            >
+                                Previous
+                            </button>
+                            <button 
+                                id="quit" 
+                                onClick={this.controlButtonClickAction}
+                            >
+                                Quit
+                            </button>
+                            <button 
+                                className={classNames('', {'disable': this.state.nextButtonDisabled})} 
+                                id="next-question" 
+                                onClick={this.controlButtonClickAction}
+                            >
+                                Next
+                            </button>
                         </div>
                     </section>
                 </HelmetProvider>
