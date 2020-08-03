@@ -291,8 +291,9 @@ class Test extends Component {
         this.interval = setInterval(() => {
             const now = new Date();
             const distance = countDownTime - now;
+            const testTimeElem = document.getElementById('test__time');
             
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const minutes = Math.floor((300000 % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             if (seconds < 10) {
@@ -300,7 +301,6 @@ class Test extends Component {
             }
 
             if (minutes < 1) {
-                const testTimeElem = document.getElementById('test__time');
                 testTimeElem.style.color = 'red';
             }
 
@@ -327,7 +327,7 @@ class Test extends Component {
     }
 
     endTest = () => {
-        const playerResume = {
+        const testSummary = {
             score: this.state.score,
             numberOfQuestions: this.state.numberOfQuestions,
             numberOfSelectedQuestion: this.state.numberOfSelectedQuestion,
@@ -338,7 +338,7 @@ class Test extends Component {
         };
 
         setTimeout(() => {
-            this.props.history.push('/');
+            this.props.history.push('/play/result', testSummary);
         }, 500)
     }
 

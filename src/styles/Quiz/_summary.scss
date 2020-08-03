@@ -1,0 +1,126 @@
+@import '../common/settings';
+
+.summary {
+
+    .text--green {
+        color: darken($green, 10%);
+    }
+
+    &__icon {
+        font-size: $xxl;
+    }
+
+    & h3 {
+        font-size: $lg;
+    }
+
+    &__main {
+        background-color: $off-white;
+        max-width: 50%;
+        padding: $sm $sm $md $md;
+
+        & h4, & h3 {
+            text-align: center;
+        }
+
+        & .left {
+            color: $off-black;
+            font-size: $normal;  
+        }
+    }
+
+    section {
+        ul {
+            margin-top: $sm;
+            text-align: center;
+
+            & li {
+                display: inline-block;
+
+                & a {
+                    padding: $sm;
+
+                    &:hover {
+                        color: $off-white;
+                    }
+                }
+
+                &:first-child {
+                    border: 1px solid $blue;
+                    margin-right: $sm;
+                    transition: .3s linear all;
+
+                    &:hover {
+                        background-color: $blue;
+
+                        & a {
+                            text-decoration: inherit;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    border: 1px solid $green;
+                    transition: .3s linear all;
+
+                    & a {
+                        color: $green;
+                    }
+
+                    &:hover {
+                        background-color: $green;
+
+                        & a {
+                            text-decoration: inherit;
+                            color: $off-white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .no-results {
+        color: $off-black;
+        margin: $xxl auto;
+    }
+}
+
+@media(max-width: $md-screen) {
+    .summary {
+        font-size: $sm;
+        padding: 0 $xs;
+
+        & h3 {
+            font-size: $md;
+        }
+
+        &__main {
+            margin: 0;
+            padding: $sm;
+            max-width: 100%;
+            width: 100%;
+
+            & h4 {
+                font-size: $sm;
+            }
+
+            & h3 {
+                font-size: $md;
+            }
+        }
+    }
+}
+
+@media(max-width: $xs-screen) {
+    section {
+        ul {
+           li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+           }
+        }
+    }
+}
