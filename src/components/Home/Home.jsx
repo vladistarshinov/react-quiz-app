@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
-import CubeOutlineIcon from 'mdi-react/CubeOutlineIcon';
+import CubeOutlineIcon from 'mdi-react/ChevronUpBoxIcon';
 
 import { BDiv } from 'bootstrap-4-react';
 
@@ -15,7 +15,7 @@ const Home = () => (
             <BDiv id="home" display="flex" justifyContent="around" alignItems="center">
                 <section className="home">
                     <BDiv className="mt-3 text-center">
-                        <CubeOutlineIcon color="yellow" size={128} />
+                        <CubeOutlineIcon color="orange" size={128} />
                     </BDiv>
                     <h1 className="home__title text-center">Quiz App</h1>
                     <BDiv w="100" display="flex" justifyContent="around" mt="5">
