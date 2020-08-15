@@ -51,8 +51,8 @@ const Instructions = () => (
                     <li>Let's do this if you think you.ve got what it takes?</li>
                 </ul>
                 <BDiv pt="2" pb="5">
-                    <span className="left"><Link to="/">No take me back.</Link></span>
-                    <span className="right"><Link to="/play/test">Okay, let's do this!</Link></span>
+                    <span className="left"><Link to="/react-quiz-app/">No take me back.</Link></span>
+                    <span className="right"><Link to="/react-quiz-app/play/test">Okay, let's do this!</Link></span>
                 </BDiv>
             </section>
         </HelmetProvider>

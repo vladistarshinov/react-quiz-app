@@ -19,11 +19,11 @@ const Home = () => (
                     </BDiv>
                     <h1 className="home__title text-center">Quiz App</h1>
                     <BDiv w="100" display="flex" justifyContent="around" mt="5">
-                        <Link to="/play/instructions" className="home__btn home__btn-play">Play</Link>
+                        <Link to="/react-quiz-app/play/instructions" className="home__btn home__btn-play">Play</Link>
                     </BDiv>
                     <BDiv w="100" display="flex" justifyContent="around" mt="3">
-                        <Link to="/login" className="home__btn home__btn-login">Login</Link>
-                        <Link to="/register" className="home__btn home__btn-register">Register</Link>
+                        <Link to="/react-quiz-app/login" className="home__btn home__btn-login">Login</Link>
+                        <Link to="/react-quiz-app/register" className="home__btn home__btn-register">Register</Link>
                     </BDiv>
                 </section>
             </BDiv>

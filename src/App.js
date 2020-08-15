@@ -9,10 +9,10 @@ import Summary from './components/Quiz/Summary';
 function App() {
   return (
     <Router>
-      <Route path="/" exact component={Home} />
-      <Route path="/play/instructions" exact component={Instructions} />
-      <Route path="/play/test" exact component={Test} />
-      <Route path="/play/result" exact component={Summary} />
+      <Route path="/react-quiz-app/" exact component={Home} />
+      <Route path="/react-quiz-app/play/instructions" exact component={Instructions} />
+      <Route path="/react-quiz-app/play/test" exact component={Test} />
+      <Route path="/react-quiz-app/play/result" exact component={Summary} />
     </Router>
   );
 }

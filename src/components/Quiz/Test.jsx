@@ -150,7 +150,7 @@ class Test extends Component {
     controlQuitButtonClick = () => {
         this.controlButtonClickSound();
         if (window.confirm('Are you sure you want to quit?')) {
-            this.props.history.push('/');
+            this.props.history.push('/react-quiz-app/');
         }
     }
 
@@ -338,7 +338,7 @@ class Test extends Component {
         };
 
         setTimeout(() => {
-            this.props.history.push('/play/result', testSummary);
+            this.props.history.push('/react-quiz-app/play/result', testSummary);
         }, 500)
     }
 

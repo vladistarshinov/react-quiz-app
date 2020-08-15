@@ -79,10 +79,10 @@ class Summary extends Component {
                     <section>
                         <ul>
                             <li>
-                                <Link className="btn-home" to="/">Back to home</Link>
+                                <Link className="btn-home" to="/react-quiz-app/">Back to home</Link>
                             </li>
                             <li>
-                                <Link className="btn-test" to="/play/test">Run test again</Link>
+                                <Link className="btn-test" to="/react-quiz-app/play/test">Run test again</Link>
                             </li>
                         </ul>
                     </section>
@@ -94,10 +94,10 @@ class Summary extends Component {
                     <h3 className="no-results">Please, take a quiz for displaying results!</h3>
                     <ul>
                         <li>
-                            <Link to="/">Back to home</Link>
+                            <Link to="/react-quiz-app/">Back to home</Link>
                         </li>
                         <li>
-                            <Link to="/play/test">Run test again</Link>
+                            <Link to="/react-quiz-app/play/test">Run test again</Link>
                         </li>
                     </ul>
                 </section>
